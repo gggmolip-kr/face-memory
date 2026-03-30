@@ -46,24 +46,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 60px 24px;
+            padding: 80px 24px;
             text-align: center;
-            position: relative;
         }
         .hero-title {
-            font-size: clamp(40px, 10vw, 72px);
+            font-size: clamp(44px, 10vw, 80px);
             font-weight: 900;
             letter-spacing: -2px;
             line-height: 1.1;
             margin-bottom: 20px;
         }
         .hero-subtitle {
-            font-size: clamp(16px, 4vw, 22px);
+            font-size: clamp(16px, 3vw, 22px);
             font-weight: 400;
             color: rgba(255,255,255,0.5);
             line-height: 1.6;
-            margin-bottom: 48px;
-            max-width: 400px;
+            margin-bottom: 56px;
+            max-width: 420px;
         }
 
         /* Phone mockup */
@@ -76,103 +75,175 @@
             box-shadow: 0 40px 80px rgba(0,0,0,0.5);
             border: 2px solid rgba(255,255,255,0.1);
         }
-        .phone-mockup video {
+        .phone-mockup video,
+        .phone-mockup img {
             width: 100%;
             display: block;
             border-radius: 38px;
         }
 
-        /* Sections */
+        /* Feature sections — 2-column on desktop */
         .section {
-            padding: 120px 24px;
-            max-width: 960px;
+            padding: 100px 24px;
+            max-width: 1100px;
             margin: 0 auto;
         }
+        .section-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 48px;
+        }
+        .section-text {
+            max-width: 440px;
+            text-align: center;
+        }
         .section-label {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.25);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-bottom: 16px;
         }
         .section-title {
-            font-size: clamp(28px, 6vw, 44px);
+            font-size: clamp(28px, 5vw, 42px);
             font-weight: 800;
             letter-spacing: -1px;
-            line-height: 1.2;
+            line-height: 1.25;
             margin-bottom: 16px;
         }
         .section-desc {
-            font-size: 17px;
-            color: rgba(255,255,255,0.5);
+            font-size: 16px;
+            color: rgba(255,255,255,0.45);
             line-height: 1.7;
-            max-width: 480px;
         }
-
-        /* Feature grid */
-        .feature-visual {
-            display: flex;
-            gap: 16px;
-            margin-top: 48px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .feature-phone {
-            width: 220px;
-            border-radius: 28px;
+        .section-visual .feature-phone {
+            width: 240px;
+            border-radius: 32px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.5);
         }
-        .feature-phone img {
+        .section-visual .feature-phone img {
             width: 100%;
             display: block;
+        }
+        .section-visual .phone-mockup {
+            width: 260px;
+        }
+
+        /* Desktop: 2-column layout */
+        @media (min-width: 768px) {
+            .hero {
+                padding: 120px 48px;
+            }
+            .hero-title {
+                font-size: 80px;
+            }
+            .phone-mockup {
+                width: 320px;
+            }
+
+            .section {
+                padding: 140px 48px;
+            }
+            .section-inner {
+                flex-direction: row;
+                align-items: center;
+                gap: 80px;
+            }
+            .section-inner.reverse {
+                flex-direction: row-reverse;
+            }
+            .section-text {
+                text-align: left;
+                flex: 1;
+                max-width: 480px;
+            }
+            .section-visual {
+                flex-shrink: 0;
+            }
+            .section-visual .feature-phone {
+                width: 280px;
+            }
+            .section-visual .phone-mockup {
+                width: 300px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 28px;
+            }
+            .feature-card {
+                padding: 40px 32px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .phone-mockup {
+                width: 360px;
+            }
+            .section-visual .feature-phone {
+                width: 320px;
+            }
+            .section-visual .phone-mockup {
+                width: 340px;
+            }
+            .section-inner {
+                gap: 100px;
+            }
         }
 
         /* Feature cards */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin-top: 48px;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 24px;
         }
         .feature-card {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 32px 28px;
+            transition: background 0.3s;
+        }
+        .feature-card:hover {
+            background: rgba(255,255,255,0.06);
         }
         .feature-card-icon {
-            font-size: 28px;
-            margin-bottom: 16px;
+            font-size: 32px;
+            margin-bottom: 20px;
         }
         .feature-card h3 {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
             margin-bottom: 8px;
         }
         .feature-card p {
             font-size: 15px;
-            color: rgba(255,255,255,0.45);
-            line-height: 1.6;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.65;
         }
 
         /* CTA */
         .cta {
             text-align: center;
-            padding: 120px 24px;
+            padding: 120px 24px 140px;
         }
         .cta-title {
-            font-size: clamp(28px, 6vw, 40px);
+            font-size: clamp(28px, 5vw, 44px);
             font-weight: 800;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .cta-button {
             display: inline-block;
             background: #fff;
             color: #000;
-            padding: 16px 40px;
+            padding: 18px 48px;
             border-radius: 16px;
             font-size: 17px;
             font-weight: 700;
@@ -181,21 +252,21 @@
             transition: transform 0.2s, opacity 0.2s;
         }
         .cta-button:hover {
-            transform: scale(1.03);
+            transform: scale(1.04);
             opacity: 0.9;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 40px 24px 60px;
+            padding: 40px 24px 64px;
             border-top: 1px solid rgba(255,255,255,0.06);
         }
         .footer a {
             color: rgba(255,255,255,0.3);
             text-decoration: none;
             font-size: 14px;
-            margin: 0 12px;
+            margin: 0 16px;
         }
         .footer a:hover { color: rgba(255,255,255,0.6); }
 
@@ -214,7 +285,7 @@
         .divider {
             width: 48px;
             height: 2px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             margin: 0 auto;
         }
     </style>
@@ -234,14 +305,18 @@
 
 <!-- Feature 1: AI Face Recognition -->
 <section class="section reveal">
-    <div class="section-label">AI Face Recognition</div>
-    <h2 class="section-title gradient-text">사진 속 아기를<br>알아서 찾아줘요</h2>
-    <p class="section-desc">수천 장의 사진 속에서 아기 얼굴만 골라내요. 시간이 지날수록 더 정확해지는 AI가 매일의 베스트 컷을 자동으로 선택해요.</p>
-    <div class="feature-visual">
-        <div class="phone-mockup">
-            <video autoplay muted loop playsinline>
-                <source src="./assets/ai-scan-video.mp4" type="video/mp4">
-            </video>
+    <div class="section-inner">
+        <div class="section-text">
+            <div class="section-label">AI Face Recognition</div>
+            <h2 class="section-title gradient-text">사진 속 아기를<br>알아서 찾아줘요</h2>
+            <p class="section-desc">수천 장의 사진 속에서 아기 얼굴만 골라내요. 시간이 지날수록 더 정확해지는 AI가 매일의 베스트 컷을 자동으로 선택해요.</p>
+        </div>
+        <div class="section-visual">
+            <div class="phone-mockup">
+                <video autoplay muted loop playsinline>
+                    <source src="./assets/ai-scan-video.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
     </div>
 </section>
@@ -250,12 +325,16 @@
 
 <!-- Feature 2: Calendar -->
 <section class="section reveal">
-    <div class="section-label">Calendar</div>
-    <h2 class="section-title gradient-text">한눈에 보는<br>성장 캘린더</h2>
-    <p class="section-desc">출생일부터 오늘까지, 날짜별로 아기 얼굴을 자동으로 골라드려요. 빈 날은 언제든 직접 채울 수 있어요.</p>
-    <div class="feature-visual">
-        <div class="feature-phone">
-            <img src="./assets/IMG_0636.jpg" alt="캘린더 화면" loading="lazy">
+    <div class="section-inner reverse">
+        <div class="section-text">
+            <div class="section-label">Calendar</div>
+            <h2 class="section-title gradient-text">한눈에 보는<br>성장 캘린더</h2>
+            <p class="section-desc">출생일부터 오늘까지, 날짜별로 아기 얼굴을 자동으로 골라드려요. 빈 날은 언제든 직접 채울 수 있어요.</p>
+        </div>
+        <div class="section-visual">
+            <div class="feature-phone">
+                <img src="./assets/IMG_0636.jpg" alt="캘린더 화면" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
@@ -264,12 +343,16 @@
 
 <!-- Feature 3: Face Slide -->
 <section class="section reveal">
-    <div class="section-label">Face Slide</div>
-    <h2 class="section-title gradient-text">스와이프 한 번으로<br>성장을 감상하세요</h2>
-    <p class="section-desc">D+0부터 오늘까지, 아기 얼굴만 모아서 넘겨보세요. 타임라인 바로 원하는 날짜로 빠르게 이동할 수 있어요.</p>
-    <div class="feature-visual">
-        <div class="feature-phone">
-            <img src="./assets/IMG_0639.jpg" alt="얼굴 슬라이드 화면" loading="lazy">
+    <div class="section-inner">
+        <div class="section-text">
+            <div class="section-label">Face Slide</div>
+            <h2 class="section-title gradient-text">스와이프 한 번으로<br>성장을 감상하세요</h2>
+            <p class="section-desc">D+0부터 오늘까지, 아기 얼굴만 모아서 넘겨보세요. 타임라인 바로 원하는 날짜로 빠르게 이동할 수 있어요.</p>
+        </div>
+        <div class="section-visual">
+            <div class="feature-phone">
+                <img src="./assets/IMG_0639.jpg" alt="얼굴 슬라이드 화면" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
@@ -278,12 +361,16 @@
 
 <!-- Feature 4: Timeline + Memo -->
 <section class="section reveal">
-    <div class="section-label">Timeline & Memo</div>
-    <h2 class="section-title gradient-text">특별한 순간에<br>한 줄 메모를</h2>
-    <p class="section-desc">첫 웃음, 첫 이유식, 첫 걸음. 날짜마다 짧은 메모를 남겨 아기의 이야기를 완성하세요.</p>
-    <div class="feature-visual">
-        <div class="feature-phone">
-            <img src="./assets/IMG_0640.jpg" alt="타임라인 화면" loading="lazy">
+    <div class="section-inner reverse">
+        <div class="section-text">
+            <div class="section-label">Timeline & Memo</div>
+            <h2 class="section-title gradient-text">특별한 순간에<br>한 줄 메모를</h2>
+            <p class="section-desc">첫 웃음, 첫 이유식, 첫 걸음. 날짜마다 짧은 메모를 남겨 아기의 이야기를 완성하세요.</p>
+        </div>
+        <div class="section-visual">
+            <div class="feature-phone">
+                <img src="./assets/IMG_0640.jpg" alt="타임라인 화면" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
@@ -291,25 +378,23 @@
 <div class="divider"></div>
 
 <!-- More features -->
-<section class="section reveal">
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-card-icon">📱</div>
-            <h3>홈 화면 위젯</h3>
-            <p>1달 전, 1주 전, 오늘의 얼굴을 홈 화면에서 바로 비교해보세요.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-card-icon">🔒</div>
-            <h3>완전한 프라이버시</h3>
-            <p>모든 데이터는 내 기기에만 저장돼요. 서버 전송, 추적, 광고 없이 안전하게.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-card-icon">🧒</div>
-            <h3>성장에 맞는 학습</h3>
-            <p>아기가 자라면서 바뀌는 얼굴도 자동으로 학습해요. 추가 학습도 가능해요.</p>
-        </div>
+<div class="features-grid reveal">
+    <div class="feature-card">
+        <div class="feature-card-icon">📱</div>
+        <h3>홈 화면 위젯</h3>
+        <p>1달 전, 1주 전, 오늘의 얼굴을 홈 화면에서 바로 비교해보세요.</p>
     </div>
-</section>
+    <div class="feature-card">
+        <div class="feature-card-icon">🔒</div>
+        <h3>완전한 프라이버시</h3>
+        <p>모든 데이터는 내 기기에만 저장돼요. 서버 전송, 추적, 광고 없이 안전하게.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-card-icon">🧒</div>
+        <h3>성장에 맞는 학습</h3>
+        <p>아기가 자라면서 바뀌는 얼굴도 자동으로 학습해요. 추가 학습도 가능해요.</p>
+    </div>
+</div>
 
 <!-- CTA -->
 <section class="cta reveal">
@@ -324,15 +409,11 @@
 </div>
 
 <script>
-// Scroll reveal animation
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-}, { threshold: 0.15 });
-
+}, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
