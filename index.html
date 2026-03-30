@@ -3,113 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>너의 눈코입 - 아기 얼굴 성장 기록</title>
+    <title>너의 눈코입 - 매일 한 장, 아기 얼굴 성장 기록</title>
+    <meta name="description" content="사진 속에서 아기 얼굴을 자동으로 찾아 매일의 변화를 기록하는 iOS 앱">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #000;
             color: #fff;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* 3D gradient text */
+        .gradient-text {
+            background: linear-gradient(
+                135deg,
+                #ffffff 0%,
+                #d0d0d0 25%,
+                #ffffff 50%,
+                #a0a0a0 75%,
+                #ffffff 100%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Hero */
         .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
             text-align: center;
-            padding: 80px 24px 60px;
-            max-width: 600px;
-            margin: 0 auto;
+            position: relative;
         }
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
+        .hero-title {
+            font-size: clamp(40px, 10vw, 72px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 20px;
         }
-        .hero p {
-            font-size: 20px;
-            color: rgba(255,255,255,0.6);
+        .hero-subtitle {
+            font-size: clamp(16px, 4vw, 22px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
+            max-width: 400px;
         }
-        .badge {
-            display: inline-block;
-            background: #fff;
-            color: #000;
-            padding: 14px 32px;
-            border-radius: 14px;
-            font-size: 17px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: opacity 0.2s;
+
+        /* Phone mockup */
+        .phone-mockup {
+            position: relative;
+            width: 280px;
+            max-width: 80vw;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.1);
         }
-        .badge:hover { opacity: 0.85; }
-        .features {
-            max-width: 600px;
+        .phone-mockup video {
+            width: 100%;
+            display: block;
+            border-radius: 38px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 120px 24px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 0 24px 80px;
         }
-        .feature {
-            padding: 32px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
         }
-        .feature h3 {
-            font-size: 20px;
+        .section-title {
+            font-size: clamp(28px, 6vw, 44px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .section-desc {
+            font-size: 17px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        /* Feature grid */
+        .feature-visual {
+            display: flex;
+            gap: 16px;
+            margin-top: 48px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .feature-phone {
+            width: 220px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .feature-phone img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Feature cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 32px 28px;
+        }
+        .feature-card-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            font-size: 18px;
             font-weight: 700;
             margin-bottom: 8px;
         }
-        .feature p {
-            font-size: 16px;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.5;
+        .feature-card p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.6;
         }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 120px 24px;
+        }
+        .cta-title {
+            font-size: clamp(28px, 6vw, 40px);
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #000;
+            padding: 16px 40px;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            font-family: inherit;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .cta-button:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 40px 24px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 40px 24px 60px;
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
         .footer a {
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.3);
             text-decoration: none;
             font-size: 14px;
+            margin: 0 12px;
         }
         .footer a:hover { color: rgba(255,255,255,0.6); }
+
+        /* Scroll animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Divider */
+        .divider {
+            width: 48px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>너의 눈코입</h1>
-        <p>매일 한 장, 아기 얼굴의 변화를<br>자동으로 기록해요</p>
-        <a href="#" class="badge">App Store에서 다운로드 (준비 중)</a>
-    </div>
 
-    <div class="features">
-        <div class="feature">
-            <h3>AI 얼굴 인식</h3>
-            <p>사진 속 수많은 얼굴 중에서 아기를 자동으로 찾아줘요. 시간이 지날수록 더 정확해져요.</p>
-        </div>
-        <div class="feature">
-            <h3>매일 한 장, 자동으로</h3>
-            <p>출생일부터 오늘까지, 날짜별로 아기 얼굴을 자동으로 골라드려요.</p>
-        </div>
-        <div class="feature">
-            <h3>얼굴 슬라이드</h3>
-            <p>D+0부터 오늘까지 스와이프 한 번으로 아기의 성장을 한눈에 감상하세요.</p>
-        </div>
-        <div class="feature">
-            <h3>타임라인 메모</h3>
-            <p>첫 웃음, 첫 이유식, 첫 걸음... 날짜마다 한 줄 메모를 남겨 특별한 순간을 기록하세요.</p>
-        </div>
-        <div class="feature">
-            <h3>위젯</h3>
-            <p>홈 화면에서 1달 전, 1주 전, 오늘의 얼굴을 비교해보세요.</p>
-        </div>
-        <div class="feature">
-            <h3>모든 데이터는 내 기기에</h3>
-            <p>사진과 얼굴 데이터는 서버에 전송되지 않아요. 모든 분석은 기기 안에서 이루어져요.</p>
-        </div>
+<!-- Hero -->
+<section class="hero">
+    <h1 class="hero-title gradient-text">너의 눈코입</h1>
+    <p class="hero-subtitle">매일 한 장, 아기 얼굴의 변화를<br>자동으로 기록해요</p>
+    <div class="phone-mockup">
+        <video autoplay muted loop playsinline>
+            <source src="./assets/hero-video.mp4" type="video/mp4">
+        </video>
     </div>
+</section>
 
-    <div class="footer">
-        <a href="./privacy">개인정보 처리방침</a>
+<!-- Feature 1: AI Face Recognition -->
+<section class="section reveal">
+    <div class="section-label">AI Face Recognition</div>
+    <h2 class="section-title gradient-text">사진 속 아기를<br>알아서 찾아줘요</h2>
+    <p class="section-desc">수천 장의 사진 속에서 아기 얼굴만 골라내요. 시간이 지날수록 더 정확해지는 AI가 매일의 베스트 컷을 자동으로 선택해요.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- Feature 2: Calendar -->
+<section class="section reveal">
+    <div class="section-label">Calendar</div>
+    <h2 class="section-title gradient-text">한눈에 보는<br>성장 캘린더</h2>
+    <p class="section-desc">출생일부터 오늘까지, 날짜별로 아기 얼굴을 자동으로 골라드려요. 빈 날은 언제든 직접 채울 수 있어요.</p>
+    <div class="feature-visual">
+        <div class="feature-phone">
+            <img src="./assets/IMG_0636.jpg" alt="캘린더 화면" loading="lazy">
+        </div>
     </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Feature 3: Face Slide -->
+<section class="section reveal">
+    <div class="section-label">Face Slide</div>
+    <h2 class="section-title gradient-text">스와이프 한 번으로<br>성장을 감상하세요</h2>
+    <p class="section-desc">D+0부터 오늘까지, 아기 얼굴만 모아서 넘겨보세요. 타임라인 바로 원하는 날짜로 빠르게 이동할 수 있어요.</p>
+    <div class="feature-visual">
+        <div class="feature-phone">
+            <img src="./assets/IMG_0639.jpg" alt="얼굴 슬라이드 화면" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Feature 4: Timeline + Memo -->
+<section class="section reveal">
+    <div class="section-label">Timeline & Memo</div>
+    <h2 class="section-title gradient-text">특별한 순간에<br>한 줄 메모를</h2>
+    <p class="section-desc">첫 웃음, 첫 이유식, 첫 걸음. 날짜마다 짧은 메모를 남겨 아기의 이야기를 완성하세요.</p>
+    <div class="feature-visual">
+        <div class="feature-phone">
+            <img src="./assets/IMG_0640.jpg" alt="타임라인 화면" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- More features -->
+<section class="section reveal">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-card-icon">📱</div>
+            <h3>홈 화면 위젯</h3>
+            <p>1달 전, 1주 전, 오늘의 얼굴을 홈 화면에서 바로 비교해보세요.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-card-icon">🔒</div>
+            <h3>완전한 프라이버시</h3>
+            <p>모든 데이터는 내 기기에만 저장돼요. 서버 전송, 추적, 광고 없이 안전하게.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-card-icon">🧒</div>
+            <h3>성장에 맞는 학습</h3>
+            <p>아기가 자라면서 바뀌는 얼굴도 자동으로 학습해요. 추가 학습도 가능해요.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal">
+    <h2 class="cta-title gradient-text">매일의 변화를<br>놓치지 마세요</h2>
+    <a href="#" class="cta-button">App Store에서 다운로드 (준비 중)</a>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+    <a href="./privacy">개인정보 처리방침</a>
+    <a href="mailto:gggmolip@gmail.com">문의</a>
+</div>
+
+<script>
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
