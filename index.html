@@ -415,7 +415,7 @@
 <!-- CTA -->
 <section class="cta reveal">
     <h2 class="cta-title gradient-text">매일의 변화를<br>놓치지 마세요</h2>
-    <a href="https://apps.apple.com/us/app/%EB%84%88%EC%9D%98-%EB%88%88%EC%BD%94%EC%9E%85/id6761637510" class="cta-button">App Store에서 다운로드</a>
+    <a id="appstore-btn" href="https://apps.apple.com/us/app/%EB%84%88%EC%9D%98-%EB%88%88%EC%BD%94%EC%9E%85/id6761637510" class="cta-button">App Store에서 다운로드</a>
 </section>
 
 <!-- Footer -->
@@ -425,12 +425,25 @@
 </div>
 
 <script>
+// Scroll reveal
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
     });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// UTM → App Store 캠페인 태그 자동 연결
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('utm_source') || 'direct';
+    const baseUrl = 'https://apps.apple.com/us/app/%EB%84%88%EC%9D%98-%EB%88%88%EC%BD%94%EC%9E%85/id6761637510';
+    const appStoreUrl = baseUrl + '?ct=' + encodeURIComponent(source) + '&mt=8';
+
+    document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(a) {
+        a.href = appStoreUrl;
+    });
+})();
 </script>
 
 </body>
